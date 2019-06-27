@@ -26,7 +26,7 @@ render(){
     return(
         <div className="Container">
             <div className="Container2">
-                {this.state.summoner}
+                {this.state.masteries.id}
             </div>
         </div>
     )
