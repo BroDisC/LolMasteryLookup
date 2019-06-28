@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import InputText from './Components/Frontend/inputText';
 import ServerSelect from './Components/Frontend/serverSelect';
 import SubmitButton from './Components/Frontend/submitButton';
@@ -34,18 +35,23 @@ export default class App extends React.Component {
       <div>
         <Container maxWidth="sm">
           <h1>LoL Mastery Lookup</h1>
-          <form>
-            <InputText></InputText>
-            <ServerSelect></ServerSelect>
-            <SubmitButton></SubmitButton>
-          </form>
+          <Grid container spacing={3}>
+            <Grid item xs={5}>
+              <InputText></InputText>
+            </Grid>
+            <Grid item xs={4}>
+              <ServerSelect></ServerSelect>
+            </Grid>
+            <Grid item xs={3}>
+              <SubmitButton></SubmitButton>
+            </Grid>
+          </Grid>
         </Container>
         <input type="text" name="summonername" id="summonername" onChange={this.handleInput}></input>
         {console.log(this.state)}
         <button type='submit' onClick={this.fetchdata}>submit</button>
-        <Background></Background>
       </div>
     );
   }
 }
-export {encryptedID}
+export {}
