@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import App from '../../App';
+//import {summonername} from '../../App'
 
 class Background extends Component {
     constructor() {
@@ -8,20 +9,6 @@ class Background extends Component {
             masteries: [],
     };
 }
-
-componentDidMount(){
-    fetch('https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/PsychoCooki?api_key=RGAPI-c60084c5-dd91-4a58-bf8f-d369e3329941')
-    .then(results => {
-        return results.json();
-    }).then(data =>{
-        this.setState({masteries: data});
-        console.log("state", this.state.data)
-    })
-    
-    
-}
-
-
 render(){
     return(
         <div className="Container">
@@ -34,4 +21,5 @@ render(){
 
 
 }
+
 export default Background;
