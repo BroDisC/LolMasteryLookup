@@ -25,19 +25,19 @@ export default class App extends React.Component {
     this.setState({summonername: e.target.value})
   }
   getEncryptedID = () => {
-    fetch(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${this.state.summonername}?api_key=RGAPI-deade7d2-c393-4041-b3da-de13daf2ffa8`)
+    fetch(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${this.state.summonername}?api_key=RGAPI-805a7084-d3fd-4a7c-836d-b61ef14f6210`)
     .then(results => {
       return results.json();
-  }).then(data =>{
+    }).then(data =>{
       this.setState({summonerData: data});
       this.setState({encryptedID: this.state.summonerData.id})
-  })
-  fetch(`https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${this.state.encryptedID}?api_key=RGAPI-deade7d2-c393-4041-b3da-de13daf2ffa8`)
+    }).then(
+    fetch(`https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${this.state.encryptedID}?api_key=RGAPI-805a7084-d3fd-4a7c-836d-b61ef14f6210`)
     .then(results => {
       return results.json();
     }).then(data =>{
       this.setState({masteryData: data});
-    })
+    }))
   }
   render(){
     return (
