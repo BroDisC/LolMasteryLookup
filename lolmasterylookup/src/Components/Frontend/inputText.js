@@ -3,11 +3,11 @@ import TextField from '@material-ui/core/TextField';
 
 class InputText extends Component {
 
-render() {
-    return(
-        <TextField label="Summoner Name" margin="dense" variant="outlined" />
-    )
-}
+    render() {
+        return(
+            <TextField fullWidth label="Summoner Name" margin="dense" variant="outlined" />
+        )
+    }
 
 }
 

@@ -4,11 +4,11 @@ import './submitButton.css'
 
 class SubmitButton extends Component {
 
-render() {
-    return(
-        <Button id="btn" variant="contained" color="primary">Lookup</Button>
-    )
-}
+    render() {
+        return(
+            <Button id="btn" variant="contained" color="primary">Lookup</Button>
+        )
+    }
 
 }
 
