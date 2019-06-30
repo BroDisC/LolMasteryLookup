@@ -25,14 +25,14 @@ export default class App extends React.Component {
     this.setState({summonername: e.target.value})
   }
   getEncryptedID = () => {
-    fetch(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${this.state.summonername}?api_key=RGAPI-ac88290a-e1e4-41d8-ade9-735b614d6a07`)
+    fetch(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${this.state.summonername}?api_key=RGAPI-554d4f30-a038-4249-82dc-41fba1192a5d`)
     .then(results => {
       return results.json();
     }).then(data =>{
       this.setState({summonerData: data});
       this.setState({encryptedID: this.state.summonerData.id});
 
-      fetch(`https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${this.state.encryptedID}?api_key=RGAPI-ac88290a-e1e4-41d8-ade9-735b614d6a07`)
+      fetch(`https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${this.state.encryptedID}?api_key=RGAPI-554d4f30-a038-4249-82dc-41fba1192a5d`)
       .then(results => {
         return results.json();
       }).then(data =>{
@@ -47,7 +47,7 @@ export default class App extends React.Component {
     if (this.state.displayTab) {
       masteryTab = (
         <Grid item md={12}>
-          <MasteryRankingTab masteries={this.state.masteryData}></MasteryRankingTab>
+          <MasteryRankingTab masteries={this.state.masteryData} summonerName={this.state.summonerData.name}></MasteryRankingTab>
         </Grid>
       )
     }

@@ -6,6 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import './masteryRankingTab.css';
 import MasteryTable from './masteryTable';
+import Grid from '@material-ui/core/Grid';
 
 function TabContainer(props) {
     return (
@@ -41,8 +42,22 @@ class MasteryRankingTab extends Component {
                     <Tab label="Masteries" />
                     <Tab label="Ranked stats" />
                 </Tabs>
-                {this.state.value === 0 && <TabContainer><MasteryTable masteries={this.props.masteries}></MasteryTable></TabContainer>}
-                {this.state.value === 1 && <TabContainer>Item Two</TabContainer>}
+                {this.state.value === 0 && 
+                    <TabContainer>
+                        <Grid container spacing={3}>
+                            <Grid item md={12}>
+                                <h2>{this.props.summonerName}</h2>
+                            </Grid>
+                        </Grid>
+
+                        <MasteryTable masteries={this.props.masteries}></MasteryTable>
+                    </TabContainer>
+                }
+                {this.state.value === 1 && 
+                    <TabContainer>
+                        Ranked Data
+                    </TabContainer>
+                }
             </AppBar>
         )
     }

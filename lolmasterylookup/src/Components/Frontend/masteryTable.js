@@ -4,6 +4,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import chestGranted from '../../files/chestGranted.png';
+import chestNotGranted from '../../files/chestNotGranted.png'
 
 class MasteryTable extends Component {
     getChampionName(mastery) {
@@ -301,6 +303,19 @@ class MasteryTable extends Component {
         }
     }
 
+    getChestPath(chestGrantedBoolean) {
+        if(chestGrantedBoolean) {
+            return chestGranted;
+        } else {
+            return chestNotGranted;
+        }
+    }
+
+    getLastPlaytime(lastPlayTime) {
+        let date = new Date(lastPlayTime);
+        return date.toLocaleString();
+    }
+
     render() {
         return(
             <Table>
@@ -310,7 +325,7 @@ class MasteryTable extends Component {
                         <TableCell align="right">Level</TableCell>
                         <TableCell align="right">Points</TableCell>
                         <TableCell align="center">Chest earned</TableCell>
-                        <TableCell align="right">Last played</TableCell>
+                        <TableCell align="left">Last played</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -321,8 +336,8 @@ class MasteryTable extends Component {
                             </TableCell>
                             <TableCell align="right">{mastery.championLevel}</TableCell>
                             <TableCell align="right">{mastery.championPoints}</TableCell>
-                            <TableCell align="right">{mastery.chestGranted}</TableCell>
-                            <TableCell align="right">{mastery.lastPlayTime}</TableCell>
+                            <TableCell align="center"><img width="20px" height="20px" src={this.getChestPath(mastery.chestGranted)} /></TableCell>
+                            <TableCell align="left">{this.getLastPlaytime(mastery.lastPlayTime)}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
