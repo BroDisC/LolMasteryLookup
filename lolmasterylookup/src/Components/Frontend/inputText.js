@@ -5,7 +5,7 @@ class InputText extends Component {
 
     render() {
         return(
-            <TextField fullWidth label="Summoner Name" margin="dense" variant="outlined" />
+            <TextField fullWidth onChange={this.props.changeFunc} label="Summoner Name" margin="dense" variant="outlined" />
         )
     }
 

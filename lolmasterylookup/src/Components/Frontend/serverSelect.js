@@ -10,22 +10,17 @@ class ServerSelect extends Component {
     constructor() {
         super();
         this.state = {
-            selectedServer: "",
             servers: [],
             serversFromJson: []
         };
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(event) {
-        this.setState({
-            selectedServer: event.target.value
-        })
     }
 
     componentWillMount() {
-        this.state.serversFromJson = leagueServers.map(server => { return {value: server.abbreviation} })
-        this.state.servers = [{value: ''}].concat(this.state.serversFromJson);
+        let serversFromJson = leagueServers.map(server => { return {value: server.abbreviation} });
+
+        this.setState({
+            servers: [{value: ''}].concat(serversFromJson)
+        })
     }
 
 
@@ -33,7 +28,7 @@ class ServerSelect extends Component {
         return(
             <FormControl id="formControl">
                 <InputLabel htmlFor="serverSelect">Server</InputLabel>
-                <Select id="serverSelect" value={this.state.selectedServer} onChange={this.handleChange}>
+                <Select id="serverSelect" value={this.props.server} onChange={this.props.changeFunc}>
                     {this.state.servers.map((server) => <MenuItem key={server.value} value={server.value}>{server.value}</MenuItem>)}
                 </Select>
             </FormControl>

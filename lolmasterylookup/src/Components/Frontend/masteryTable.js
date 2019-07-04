@@ -336,7 +336,7 @@ class MasteryTable extends Component {
                             </TableCell>
                             <TableCell align="right">{mastery.championLevel}</TableCell>
                             <TableCell align="right">{mastery.championPoints}</TableCell>
-                            <TableCell align="center"><img width="20px" height="20px" src={this.getChestPath(mastery.chestGranted)} /></TableCell>
+                            <TableCell align="center"><img alt="Chest" width="20px" height="20px" src={this.getChestPath(mastery.chestGranted)} /></TableCell>
                             <TableCell align="left">{this.getLastPlaytime(mastery.lastPlayTime)}</TableCell>
                         </TableRow>
                     ))}

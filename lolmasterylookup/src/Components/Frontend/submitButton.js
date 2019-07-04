@@ -6,7 +6,7 @@ class SubmitButton extends Component {
 
     render() {
         return(
-            <Button id="btn" variant="contained" color="primary">Lookup</Button>
+            <Button onClick={this.props.clickFunc} id="btn" variant="contained" color="primary">Lookup</Button>
         )
     }
 

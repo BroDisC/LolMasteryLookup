@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import './masteryRankingTab.css';
 import MasteryTable from './masteryTable';
 import Grid from '@material-ui/core/Grid';
+import RankingInfo from './rankingInfo';
 
 function TabContainer(props) {
     return (
@@ -55,7 +56,7 @@ class MasteryRankingTab extends Component {
                 }
                 {this.state.value === 1 && 
                     <TabContainer>
-                        Ranked Data
+                        <RankingInfo rankedData={this.props.rankedData}></RankingInfo>
                     </TabContainer>
                 }
             </AppBar>

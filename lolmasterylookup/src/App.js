@@ -17,27 +17,38 @@ export default class App extends React.Component {
       summonerData: null,
       encryptedID: '',
       masteryData: null,
-      displayTab: false
+      server: '',
+      displayTab: false,
+      rankedData: null
     }
   }
   handleInput = (e) => {
-    console.log("here")
-    this.setState({summonername: e.target.value})
+    this.setState({summonername: e.target.value});
+  }
+  handleSelect = (e) => {
+    this.setState({server: e.target.value});
   }
   getEncryptedID = () => {
-    fetch(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${this.state.summonername}?api_key=RGAPI-554d4f30-a038-4249-82dc-41fba1192a5d`)
+    fetch(`https://${this.state.server}1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${this.state.summonername}?api_key=RGAPI-3c84ae4c-3ae7-4a0b-ac07-5ba519e99a0f`)
     .then(results => {
       return results.json();
     }).then(data =>{
       this.setState({summonerData: data});
       this.setState({encryptedID: this.state.summonerData.id});
 
-      fetch(`https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${this.state.encryptedID}?api_key=RGAPI-554d4f30-a038-4249-82dc-41fba1192a5d`)
+      fetch(`https://${this.state.server}1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${this.state.encryptedID}?api_key=RGAPI-3c84ae4c-3ae7-4a0b-ac07-5ba519e99a0f`)
       .then(results => {
         return results.json();
       }).then(data =>{
         this.setState({masteryData: data});
         this.setState({displayTab: true});
+
+        fetch(`https://${this.state.server}1.api.riotgames.com/lol/league/v4/entries/by-summoner/${this.state.encryptedID}?api_key=RGAPI-3c84ae4c-3ae7-4a0b-ac07-5ba519e99a0f`)
+        .then(results => {
+          return results.json();
+        }).then(data =>{
+          this.setState({rankedData: data[1]});
+        });
       });
     });
   }
@@ -47,7 +58,7 @@ export default class App extends React.Component {
     if (this.state.displayTab) {
       masteryTab = (
         <Grid item md={12}>
-          <MasteryRankingTab masteries={this.state.masteryData} summonerName={this.state.summonerData.name}></MasteryRankingTab>
+          <MasteryRankingTab masteries={this.state.masteryData} summonerName={this.state.summonerData.name} rankedData={this.state.rankedData}></MasteryRankingTab>
         </Grid>
       )
     }
@@ -57,20 +68,17 @@ export default class App extends React.Component {
           <h1>LoL Mastery Lookup</h1>
           <Grid container spacing={3}>
             <Grid item md={5}>
-              <InputText></InputText>
+              <InputText changeFunc={this.handleInput}></InputText>
             </Grid>
             <Grid item md={3}>
-              <ServerSelect></ServerSelect>
+              <ServerSelect changeFunc={this.handleSelect} server={this.state.server}></ServerSelect>
             </Grid>
             <Grid item md={4}>
-              <SubmitButton></SubmitButton>
+              <SubmitButton clickFunc={this.getEncryptedID}></SubmitButton>
             </Grid>
             {masteryTab}
           </Grid>
         </Container>
-        <input type="text" name="summonername" id="summonername" onChange={this.handleInput}></input>
-        {console.log(this.state)}
-        <button type='submit' onClick={this.getEncryptedID}>submit</button>
       </div>
     );
   }
